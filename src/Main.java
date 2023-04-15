@@ -19,12 +19,13 @@ public class Main {
             userCrop.setCost(CropCalculator.getInputInt("How much does the crop seed cost in gp?", scanner));
             userCrop.setSellPrice(CropCalculator.getInputInt("How much does the crop sell for in gp?", scanner));
             userCrop.setNumberofCrops(CropCalculator.getInputInt("How many crops do you plan to plant?", scanner));
-            userCrop.setGrowthTime(CropCalculator.getInputInt("How long does it take for the plant to be harvested?", scanner));
+            userCrop.setGrowthTime(CropCalculator.getInputInt("How long does it take for the plant to be fully-grown (harvestable)?", scanner));
 
             userCrop.setRepeatedHarvest(CropCalculator.getInputBoolean("Does the crop have repeated harvests?", scanner));
             if (userCrop.getRepeatedHarvests()) {
                 userCrop.setRepeatedGrowthTime(CropCalculator.getInputInt("How long does it take for the plant to regrow produce?", scanner));
             }
+            userCrop.setSeasonNumber(CropCalculator.getInputInt("How many seasons does the crop grow for?", scanner));
 
             double profit = CropCalculator.calculateRevenue(userCrop);
             System.out.println("The profit for the given crop is: " + profit);

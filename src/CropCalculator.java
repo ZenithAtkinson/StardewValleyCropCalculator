@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class CropCalculator {
 
     public static double calculateRevenue(givenCrop crop) { //calculates revenue based on user input.
-        int numberOfHarvests = 0;
+        int numberOfHarvests = 1;
         // add bool conditions for different parts of the function. Make them parameters for the function itself ^
         int seasonLength = 28;  // in days
         int TotalSeasonLength = seasonLength * crop.getSeasonNumber(); // multiply season length by the number of seasons the crop grows (given it will be consecutively grown)
@@ -10,28 +10,30 @@ public class CropCalculator {
             int AdjustedSeasonLength = TotalSeasonLength - (crop.getGrowthTime() * crop.getSeasonNumber());
             numberOfHarvests = AdjustedSeasonLength / (crop.getGrowthTime() * crop.getNumberofCrops());
         } else {
-            numberOfHarvests = TotalSeasonLength / crop.getGrowthTime() * crop.getNumberofCrops(); // how many times the number of planted crops can be harvested in a season, given they are planted the day they are harvested.
+            numberOfHarvests = TotalSeasonLength / (crop.getGrowthTime() * crop.getNumberofCrops()); // how many times the number of planted crops can be harvested in a season, given they are planted the day they are harvested.
         }
 
         double totalCost = numberOfHarvests * crop.getCost(); //total cost of all the seeds planted
         double totalRevenue = numberOfHarvests * crop.getSellPrice(); //total sell price of all harvested crops during given total season length
 
 
-
-
         return totalRevenue - totalCost;
 
     }
-    public static int getInputInt(String message, Scanner scanner) { //checks if something is an Int. If not, repeats statement and input until an Int is received
+    public static int getInputInt(String message, Scanner scanner) {
         int inputInt;
         while (true) {
             System.out.println(message);
             try {
                 inputInt = scanner.nextInt();
-                break;
+                if (inputInt > 0) {
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter an integer greater than 0.");
+                }
             } catch (Exception e) {
                 System.out.println("Invalid input. Please enter a digit.");
-                scanner.nextLine(); // clear the input buffer
+                scanner.nextLine();
             }
         }
         return inputInt;
